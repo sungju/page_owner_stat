@@ -1,4 +1,10 @@
+#
+# Analyse page_owner data and make summary
+#
+# Written by Daniel Sungju Kwon
+#
 import sys
+import os
 import operator
 from optparse import OptionParser
 
@@ -26,6 +32,10 @@ def get_size_str(size, coloring = False):
 
 
 def handle_a_file(filename, options):
+    if not os.path.isfile(filename):
+        print("File '%s' does not exist" % (filename))
+        sys.exit(1)
+
     with open(filename, 'r') as f:
         while True:
             by_whom = ""
