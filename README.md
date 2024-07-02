@@ -6,5 +6,5 @@ It reads raw page_owner data or the data sorted with `page_owner_sort` and provi
 You can run it like below.
 
 ~~~
-$ python page_owner_stat.py page_owner_sorted.txt
+python page_owner_stat.py page_owner_sorted.txt
 ~~~
