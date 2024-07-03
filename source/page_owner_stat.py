@@ -29,15 +29,15 @@ def get_size_str(size, coloring = False):
     if size > (1024 * 1024 * 1024): # GiB
         size_str = "%.1f GiB" % (size / (1024*1024*1024))
         if coloring == True:
-            crashcolor.set_color(crashcolor.RED)
+            ansicolor.set_color(ansicolor.RED)
     elif size > (1024 * 1024): # MiB
         size_str = "%.1f MiB" % (size / (1024*1024))
         if coloring == True:
-            crashcolor.set_color(crashcolor.MAGENTA)
+            ansicolor.set_color(ansicolor.MAGENTA)
     elif size > (1024): # KiB
         size_str = "%.1f KiB" % (size / (1024))
         if coloring == True:
-            crashcolor.set_color(crashcolor.GREEN)
+            ansicolor.set_color(ansicolor.GREEN)
     else:
         size_str = "%.0f B" % (size)
 
