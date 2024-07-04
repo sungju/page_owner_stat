@@ -155,6 +155,9 @@ def handle_a_file(filename, options):
         n_items = 10
     n_items = n_items - 1
 
+    if options.number <= 0:
+        options.all = True
+
     if len(alloc_by_dict) > 0:
         print("By call trace")
         print("=============")
