@@ -8,3 +8,13 @@ You can run it like below.
 ~~~
 python ./source/page_owner_stat.py page_owner_sorted.txt
 ~~~
+
+### Notes
+
+If you are running the script in a different system from the data source, you may need to set page size by yourself.
+
+For example, for the data from `ppc64le`, you can use `-p 65536` like below.
+
+~~~
+python ./source/page_owner_stat.py -p 65536 page_owner_sorted.txt
+~~~
