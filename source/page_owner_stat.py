@@ -101,11 +101,14 @@ def handle_a_file(filename, options):
 
                 if (len(line.strip()) == 0):
                     continue
-                #print("<%s, %d>" % (line.strip(), f.tell()))
+                #print("<%s, %d>" % (words, f.tell()))
                 if words[0].startswith("Page allocated via order"):
                     by_type = ""
-                else:
+                elif len(words) >= 4:
                     by_type = words[3].split()[2]
+                else:
+                    by_type = ""
+
                 pages = 2**int(words[0].split()[-1])
                 pages = pages * times
                 while True:
