@@ -148,6 +148,12 @@ def handle_a_file(filename, options):
 
                 alloc_module_dict[mod_name] = pages
 
+    
+    if options.number > 0:
+        n_items = options.number
+    else:
+        n_items = 10
+    n_items = n_items - 1
 
     if len(alloc_by_dict) > 0:
         print("By call trace")
@@ -164,9 +170,9 @@ def handle_a_file(filename, options):
         else:
             if options.reverse:
                 print_start = 0
-                print_end = min(total_count, 10)
+                print_end = min(total_count, n_items)
             else:
-                print_start = total_count - 10
+                print_start = total_count - n_items
                 if print_start < 0:
                     print_start = 0
                 print_end = total_count
@@ -179,11 +185,11 @@ def handle_a_file(filename, options):
             if print_start <= print_count <= print_end:
                 print("\n%10s : %s" % (get_size_str(pages * page_size, True), by_whom))
             else:
-                if len(sorted_usage) > 10:
+                if len(sorted_usage) > n_items:
                     if not skip_printed:
                         print("\n%15s %d %s" % (
                             "... < skipped ",
-                            len(sorted_usage) - 10,
+                            len(sorted_usage) - n_items,
                             " items > ..."))
                     skip_printed = True
 
@@ -213,9 +219,9 @@ def handle_a_file(filename, options):
         else:
             if options.reverse:
                 print_start = 0
-                print_end = min(total_count, 10)
+                print_end = min(total_count, n_items)
             else:
-                print_start = total_count - 10
+                print_start = total_count - n_items
                 if print_start < 0:
                     print_start = 0
                 print_end = total_count
@@ -227,11 +233,11 @@ def handle_a_file(filename, options):
             if print_start <= print_count <= print_end:
                 print("%10s : %s" % (get_size_str(pages * page_size, True), mod_name))
             else:
-                if len(sorted_usage) > 10:
+                if len(sorted_usage) > n_items:
                     if not skip_printed:
                         print("\n%15s %d %s" % (
                             "... < skipped ",
-                            len(sorted_usage) - 10,
+                            len(sorted_usage) - n_items,
                             " items > ..."))
                     skip_printed = True
 
@@ -261,9 +267,9 @@ def handle_a_file(filename, options):
         else:
             if options.reverse:
                 print_start = 0
-                print_end = min(total_count, 10)
+                print_end = min(total_count, n_items)
             else:
-                print_start = total_count - 10
+                print_start = total_count - n_items
                 if print_start < 0:
                     print_start = 0
                 print_end = total_count
@@ -275,11 +281,11 @@ def handle_a_file(filename, options):
             if print_start <= print_count <= print_end:
                 print("%10s : %s" % (get_size_str(pages * page_size), by_type))
             else:
-                if len(sorted_usage) > 10:
+                if len(sorted_usage) > n_items:
                     if not skip_printed:
                         print("\n%15s %d %s" % (
                             "... < skipped ",
-                            len(sorted_usage) - 10,
+                            len(sorted_usage) - n_items,
                             " items > ..."))
                     skip_printed = True
 
@@ -288,17 +294,21 @@ def handle_a_file(filename, options):
 
 def page_owner_stat():
     op = OptionParser()
-    op.add_option("-r", "--reverse", dest="reverse", default=0,
-            action="store_true",
-            help="Show in reverse")
-
     op.add_option("-a", "--all", dest="all", default=0,
             action="store_true",
             help="Show all list")
 
+    op.add_option("-n", "--number", dest="number", default=0,
+            type=int, action="store",
+            help="Show number of entries only")
+
     op.add_option("-p", "--pagesize", dest="pagesize", default=0,
             type=int, action="store",
             help="Set kernel pagesize. ex) ppc64le = 65536")
+
+    op.add_option("-r", "--reverse", dest="reverse", default=0,
+            action="store_true",
+            help="Show in reverse")
 
     (o, args) = op.parse_args()
 
