@@ -22,6 +22,7 @@ import sys
 import os
 import operator
 import subprocess
+import ansicolor
 from optparse import OptionParser
 
 def get_size_str(size, coloring = False):
@@ -176,7 +177,7 @@ def handle_a_file(filename, options):
             sum_size = sum_size + pages
 
             if print_start <= print_count <= print_end:
-                print("\n%10s : %s" % (get_size_str(pages * page_size), by_whom))
+                print("\n%10s : %s" % (get_size_str(pages * page_size, True), by_whom))
             else:
                 if len(sorted_usage) > 10:
                     if not skip_printed:
@@ -186,10 +187,14 @@ def handle_a_file(filename, options):
                             " items > ..."))
                     skip_printed = True
 
+            ansicolor.set_color(ansicolor.RESET)
             print_count = print_count + 1
 
         if sum_size > 0:
-            print("\nTotal allocated size : %s (%d kB)" % (get_size_str(sum_size * page_size), sum_size * page_size / 1024))
+            print("\nTotal allocated size : %s (%d kB)" % \
+                  (get_size_str(sum_size * page_size, True),
+                   sum_size * page_size / 1024))
+            ansicolor.set_color(ansicolor.RESET)
 
 
     if len(alloc_module_dict) > 0:
@@ -220,7 +225,7 @@ def handle_a_file(filename, options):
             sum_size = sum_size + pages
 
             if print_start <= print_count <= print_end:
-                print("%10s : %s" % (get_size_str(pages * page_size), mod_name))
+                print("%10s : %s" % (get_size_str(pages * page_size, True), mod_name))
             else:
                 if len(sorted_usage) > 10:
                     if not skip_printed:
@@ -230,10 +235,14 @@ def handle_a_file(filename, options):
                             " items > ..."))
                     skip_printed = True
 
+            ansicolor.set_color(ansicolor.RESET)
             print_count = print_count + 1
 
         if sum_size > 0:
-            print("\nTotal allocated by modules : %s (%d kB)" % (get_size_str(sum_size * page_size), sum_size * page_size / 1024))
+            print("\nTotal allocated by modules : %s (%d kB)" % \
+                  (get_size_str(sum_size * page_size, True),
+                   sum_size * page_size / 1024))
+            ansicolor.set_color(ansicolor.RESET)
 
 
     if len(alloc_type_dict) > 0:
