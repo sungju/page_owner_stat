@@ -291,6 +291,10 @@ def handle_a_file(filename, options):
 
             print_count = print_count + 1
 
+    ansicolor.set_color(ansicolor.CYAN)
+    print("\nNotes: Calculation was done with pagesize=%d" % (page_size))
+    ansicolor.set_color(ansicolor.RESET)
+
 
 def page_owner_stat():
     op = OptionParser()
