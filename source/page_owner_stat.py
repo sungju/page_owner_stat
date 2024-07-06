@@ -183,7 +183,7 @@ def handle_a_file(filename, options):
             sum_size = sum_size + pages
 
             if print_start <= print_count <= print_end:
-                print("\n%10s : %s" % (get_size_str(pages * page_size, True), by_whom))
+                print("\n%s : %s" % (get_size_str(pages * page_size, True), by_whom))
             else:
                 if len(sorted_usage) > n_items:
                     if not skip_printed:
@@ -197,9 +197,9 @@ def handle_a_file(filename, options):
             print_count = print_count + 1
 
         if sum_size > 0:
-            print("\nTotal allocated size : %s (%d kB)" % \
+            print("\nTotal allocated size : %s (%s kB)" % \
                   (get_size_str(sum_size * page_size, True),
-                   sum_size * page_size / 1024))
+                   '{:,.0f}'.format(sum_size * page_size / 1024)))
             ansicolor.set_color(ansicolor.RESET)
 
 
@@ -245,9 +245,9 @@ def handle_a_file(filename, options):
             print_count = print_count + 1
 
         if sum_size > 0:
-            print("\nTotal allocated by modules : %s (%d kB)" % \
+            print("\nTotal allocated by modules : %s (%s kB)" % \
                   (get_size_str(sum_size * page_size, True),
-                   sum_size * page_size / 1024))
+                   '{:,.0f}'.format(sum_size * page_size / 1024)))
             ansicolor.set_color(ansicolor.RESET)
 
 
