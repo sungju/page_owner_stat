@@ -105,8 +105,14 @@ def handle_a_file(filename, options):
                 #print("<%s, %d>" % (words, f.tell()))
                 if words[0].startswith("Page allocated via order"):
                     by_type = ""
-                elif len(words) >= 4:
+                elif len(words) >= 4 and words[0] == 'Page':
                     by_type = words[3].split()[2]
+                elif words[0].startswith("PFN"):
+                    while True:
+                        line = f.readline().strip()
+                        if len(line) == 0:
+                            break
+                    continue
                 else:
                     by_type = ""
 
